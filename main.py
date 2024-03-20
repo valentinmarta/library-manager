@@ -1,4 +1,8 @@
+from manager import *
+
 def main():
+
+    object = Manager()
 
     while True:
     
@@ -10,7 +14,7 @@ def main():
         Option: """)
 
         if op == "1":
-            pass
+            object.create_book()
         elif op == "2":
             pass
         elif op == "3":

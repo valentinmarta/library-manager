@@ -5,7 +5,7 @@ class Manager:
     def __init__(self):
         self.book_list : list[Book] = []
         self.language = {
-        "en":"english", 
+        "sp":"spanish", 
         "ge":"german",
         "ch":"chinese"
         }
@@ -50,11 +50,11 @@ class Manager:
                 return id
                 
 
-    def save_book(self, id, name, author):
+    def save_book(self, id, name, author, extra):
         
         try:
             file = open("books.txt", "a+")
-            file.write(f"Id: {id}, Name: {name}, Author: {author}\n")
+            file.write(f"Id: {id}, Name: {name}, Author: {author}, Another attribute: {extra}\n")
             file.close()
         except Exception as e:
             print(e)
@@ -73,7 +73,43 @@ class Manager:
 
     #First option
     def create_book(self):
-        pass
+        type = self.book_type()
+        id = self.check_id()
+        name = input("Type the name of the book: ")
+        author = input("Type the name of the author: ")
+        state = "returned"
+
+        if type == "BookKids":
+            
+            while True:
+                try:
+                    minimum_age = int(input("Type the minimum age of the book: "))
+                    break
+                except Exception as e:
+                    print(f"Error: {e}, try again.")
+
+            extra = f"The minimum age of the book is {minimum_age}"
+
+            book = BookKids(id, name, author, state, extra)
+            self.book_list.append(book)
+
+        elif type == "LanguageBook":
+            
+            language = self.choose_language()
+
+            extra = f"The language of the book is {language}"
+
+            book = LanguageBook(id, name, author, state, extra)
+            self.book_list.append(book)
+
+        else:
+
+            book = Book(id, name, author, state)
+            self.book_list.append(book)
+
+            extra = "None"
+
+        self.save_book(id, name, author, extra)
 
     #Second option
     def show_books(self):
