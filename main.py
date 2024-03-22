@@ -16,7 +16,7 @@ def main():
         if op == "1":
             object.create_book()
         elif op == "2":
-            pass
+            object.show_books()
         elif op == "3":
             pass
         elif op == "4":

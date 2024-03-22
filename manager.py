@@ -65,7 +65,7 @@ class Manager:
         for i in self.language:
             print(f"key: {i}, language: {self.language[i]}")
 
-        op = input("Choose a language by entering its key. If you enter something else, the default language will be english.")
+        op = input("Choose a language by entering its key. If you enter something else, the default language will be english: ")
 
         language = self.language.get(op, "english")
         return language
@@ -113,8 +113,20 @@ class Manager:
 
     #Second option
     def show_books(self):
-        pass
+        
+        if self.book_list:
+            try:
+                var = open("books.txt", "r")
+                file = var.read()
 
+                for letter in file:
+                    print(letter, end="")
+                var.close()
+            except Exception as e:
+                print(f"Error: {e}")
+        else:
+            print("There is no book on the list.")
+            
     #Third option
     def change_state(self):
         pass
